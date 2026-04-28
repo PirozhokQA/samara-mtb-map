@@ -1,3 +1,5 @@
 .repo/
 gcm.exe
 gcm.exe.config
+server.log
+server.err.log
