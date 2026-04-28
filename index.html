@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MTB Самарская область</title>
+    <title>Веломеста Самарской области</title>
     <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://tile.openstreetmap.org" />
     <link
@@ -15,36 +15,36 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <section class="map-panel" aria-label="Карта MTB спотов Самарской области">
-        <div id="map"></div>
-        <div class="map-overlay">
-          <div>
-            <p class="eyebrow">MTB карта</p>
-            <h1>Самарская область</h1>
-          </div>
-          <button class="locate-button" id="fitMap" type="button">Показать всё</button>
-        </div>
-      </section>
-
-      <aside class="sidebar" aria-label="Каталог спотов">
-        <header class="sidebar-header">
-          <p class="eyebrow">Каталог трейлов и мест</p>
-          <h2>Где кататься</h2>
-          <p>
-            Стартовая база известных MTB-направлений: городские леса, Жигули,
-            Самарская Лука и дальние грунтовые петли.
-          </p>
+    <main class="atlas">
+      <aside class="guide-panel">
+        <header class="brand">
+          <p>Велогид</p>
+          <h1>Самарская область</h1>
+          <span>Трейлы, грунты, видовые горы и длинные петли вокруг Волги.</span>
         </header>
 
-        <section class="stats" aria-label="Сводка">
+        <section class="search-box" aria-label="Поиск места">
+          <input id="searchInput" type="search" placeholder="Найти место или район" />
+        </section>
+
+        <section class="filter-group" aria-label="Фильтр по формату">
+          <div class="section-label">Формат</div>
+          <div class="chips" id="styleFilters"></div>
+        </section>
+
+        <section class="filter-group" aria-label="Фильтр по району">
+          <div class="section-label">Район</div>
+          <div class="chips" id="regionFilters"></div>
+        </section>
+
+        <section class="quick-stats" aria-label="Статистика каталога">
           <div>
-            <strong id="spotCount">0</strong>
-            <span>спотов</span>
+            <strong id="totalCount">0</strong>
+            <span>мест</span>
           </div>
           <div>
-            <strong id="routeCount">0</strong>
-            <span>маршрутов</span>
+            <strong id="longCount">0</strong>
+            <span>длинных</span>
           </div>
           <div>
             <strong id="parkCount">0</strong>
@@ -52,25 +52,41 @@
           </div>
         </section>
 
-        <section class="controls" aria-label="Фильтры">
-          <label class="search-field">
-            <span>Поиск</span>
-            <input id="searchInput" type="search" placeholder="Тип-Тяв, Жигули, Сызрань" />
-          </label>
-
-          <div class="filter-row" id="typeFilters" aria-label="Тип спота"></div>
-          <div class="filter-row" id="difficultyFilters" aria-label="Сложность"></div>
+        <section class="collection">
+          <div class="section-label">Подборки</div>
+          <div id="collectionList" class="collection-list"></div>
         </section>
+      </aside>
 
-        <section class="spot-list" id="spotList" aria-live="polite"></section>
+      <section class="map-stage" aria-label="Карта веломест">
+        <div id="map"></div>
+        <div class="map-head">
+          <div>
+            <p>Карта спотов</p>
+            <h2 id="mapTitle">Все места</h2>
+          </div>
+          <button id="fitMap" type="button">Показать всё</button>
+        </div>
+        <div class="map-legend" aria-label="Легенда карты">
+          <span><i class="legend-dot trail"></i>трейлы</span>
+          <span><i class="legend-dot scenic"></i>видовые</span>
+          <span><i class="legend-dot long"></i>длинные</span>
+          <span><i class="legend-dot park"></i>ООПТ</span>
+        </div>
+      </section>
 
-        <footer class="notes">
-          <p>
-            Перед выездом проверяй сезонность, доступ на ООПТ и локальные правила.
-            Координаты некоторых протяжённых маршрутов отмечают стартовую или ключевую точку.
-          </p>
-          <a href="mailto:mtb-samara@example.com?subject=MTB%20%D1%81%D0%BF%D0%BE%D1%82%20%D0%B4%D0%BB%D1%8F%20%D0%BA%D0%B0%D1%80%D1%82%D1%8B">Предложить спот</a>
-        </footer>
+      <aside class="place-panel" aria-label="Выбранное место">
+        <section class="place-detail" id="placeDetail"></section>
+        <section class="place-list-shell">
+          <div class="list-top">
+            <div>
+              <p class="section-label">Каталог</p>
+              <h2 id="listTitle">Все веломеста</h2>
+            </div>
+            <span id="visibleCount">0</span>
+          </div>
+          <div class="place-list" id="placeList" aria-live="polite"></div>
+        </section>
       </aside>
     </main>
 
